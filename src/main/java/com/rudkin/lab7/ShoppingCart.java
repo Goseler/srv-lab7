@@ -100,10 +100,8 @@ public class ShoppingCart{
         appendFormattedLine(sb, header, align, width, true);
 
         // separator
-        for (int i = 0; i < lineLength; i++)
-            sb.append("-");
-
-        appendSeparator(sb, 1);
+        appendSeparator(sb, lineLength, "-");
+        appendBreak(sb);
 
         // lines
         for (String[] line : lines) {
@@ -111,15 +109,24 @@ public class ShoppingCart{
         }
 
         // separator
-        for (int i = 0; i < lineLength; i++)
-            sb.append("-");
-
-        appendSeparator(sb, 1);
+        appendSeparator(sb, lineLength, "-");
+        appendBreak(sb);
 
         // footer
         appendFormattedLine(sb, footer, align, width, false);
 
         return sb.toString();
+    }
+
+    private StringBuilder appendSeparator(StringBuilder sb, int lineLength, String separator){
+        for(int i = 0; i < lineLength; i++)
+            sb.append(separator);
+        return sb;
+    }
+
+    private StringBuilder appendBreak(StringBuilder sb){
+        sb.append("\n");
+        return sb;
     }
 
     private double calculateItemsParameters() {
@@ -288,7 +295,7 @@ public class ShoppingCart{
         for(int i = 0; i < line.length; i++)
             appendFormatted(sb, line[i], align[i], width[i]);
         if(newLine)
-            appendSeparator(sb, 1);
+            appendBreak(sb)
     }
 
 }
